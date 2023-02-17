@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\\{{properCase name}};
+use Illuminate\Http\Request;
+
+class {{properCase name}}Controller extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return {{properCase name}}::all();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response|\App\Models\\{{properCase name}} ${{snakeCase name}}
+     */
+    public function store(Request $request)
+    {
+        $request->validate([]);
+
+        ${{snakeCase name}} = {{properCase name}}::create($request->all());
+
+        return ${{snakeCase name}};
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response|\App\Models\\{{properCase name}} ${{snakeCase name}}
+     */
+    public function show($id)
+    {
+        ${{snakeCase name}} = {{properCase name}}::find($id);
+        if (! ${{snakeCase name}}) {
+            return response(['error' => 1, 'message' => '{{titleCase name}} doesn\'t exist'], 404);
+        }
+
+        return ${{snakeCase name}};
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|{{properCase name}}
+     */
+    public function update(Request $request, $id)
+    {
+        ${{snakeCase name}} = {{properCase name}}::find($id);
+        if (! ${{snakeCase name}}) {
+            return response(['error' => 1, 'message' => '{{titleCase name}} doesn\'t exist'], 404);
+        }
+
+        ${{snakeCase name}}->update($request->all());
+
+        return ${{snakeCase name}};
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        ${{snakeCase name}} = {{properCase name}}::find($id);
+        if (! ${{snakeCase name}}) {
+            return response(['error' => 1, 'message' => '{{titleCase name}} doesn\'t exist'], 404);
+        }
+
+        return ${{snakeCase name}}->delete();
+    }
+}
