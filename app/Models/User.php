@@ -8,7 +8,8 @@ use Illuminate\Notifications\Notifiable;
 use Wildside\Userstamps\Userstamps;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
     use HasApiTokens, HasFactory, Notifiable, Userstamps;
 
     /**
@@ -19,7 +20,10 @@ class User extends Authenticatable {
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
+        'gender',
+        'account_status',
     ];
 
     /**
@@ -28,6 +32,7 @@ class User extends Authenticatable {
      * @var array<int, string>
      */
     protected $hidden = [
+        'phone',
         'password',
         'remember_token',
         'created_at',
@@ -44,7 +49,8 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(Role::class, 'user_roles');
     }
 }

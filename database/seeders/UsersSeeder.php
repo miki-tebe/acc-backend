@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\GenderType;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -24,6 +25,8 @@ class UsersSeeder extends Seeder {
             'email' => 'admin@hydra.project',
             'password' => Hash::make('hydra'),
             'name' => 'Hydra Admin',
+            'phone' => '25100000000',
+            'gender' => GenderType::M
         ]);
         $user->roles()->attach(Role::where('slug', 'admin')->first());
     }

@@ -27,7 +27,7 @@ class RoleTest extends TestCase {
 
         $response
             ->assertJson(
-                fn (AssertableJson $json) => $json->has(6)
+                fn (AssertableJson $json) => $json->has(7)
                     ->first(
                         fn ($json) => $json->where('id', 1)
                             ->where('name', 'Administrator')
@@ -83,7 +83,7 @@ class RoleTest extends TestCase {
             );
     }
 
-    public function test_update_role_namd_and_slug_as_admin() {
+    public function test_update_role_name_and_slug_as_admin() {
         $response = $this->postJson('/api/login', [
             'email' => 'admin@hydra.project',
             'password' => 'hydra',

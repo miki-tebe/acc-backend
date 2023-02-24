@@ -2,13 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Enums\GenderType;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
-class UserTest extends TestCase {
+class UserTest extends TestCase
+{
     /**
      * A basic feature test example.
      *
@@ -18,26 +20,33 @@ class UserTest extends TestCase {
 
     private $user_id;
 
-    public function test_new_user_registration() {
+    public function test_new_user_registration()
+    {
         $response = $this->postJson('/api/users', [
             'name' => 'Test User',
             'email' => 'test@test.com',
             'password' => 'test',
+            'phone' => '25100000005',
+            'gender' => "0",
         ]);
 
         $response
             ->assertJson(
                 fn (AssertableJson $json) => $json->where('email', 'test@test.com')
                     ->where('name', 'Test User')
+                    ->where('gender', "0")
                     ->etc()
             );
     }
 
-    public function test_existing_email_registration_fail() {
+    public function test_existing_email_registration_fail()
+    {
         $response = $this->postJson('/api/users', [
             'name' => 'Test User',
             'email' => 'test@test.com',
             'password' => 'test',
+            'phone' => '25100000005',
+            'gender' => "0",
         ]);
 
         $response
@@ -47,7 +56,8 @@ class UserTest extends TestCase {
             );
     }
 
-    public function test_new_user_login() {
+    public function test_new_user_login()
+    {
         $response = $this->postJson('/api/login', [
             'email' => 'test@test.com',
             'password' => 'test',
@@ -65,7 +75,8 @@ class UserTest extends TestCase {
             );
     }
 
-    public function test_new_user_failed_login() {
+    public function test_new_user_failed_login()
+    {
         $response = $this->postJson('/api/login', [
             'email' => 'test@test.com',
             'password' => 'testX',
@@ -78,7 +89,8 @@ class UserTest extends TestCase {
             );
     }
 
-    public function test_new_user_name_update_with_user_token() {
+    public function test_new_user_name_update_with_user_token()
+    {
         $response = $this->postJson('/api/login', [
             'email' => 'test@test.com',
             'password' => 'test',
@@ -88,7 +100,7 @@ class UserTest extends TestCase {
         $this->token = $data->token;
         $this->user_id = $data->id;
 
-        $response = $this->withHeader('Authorization', 'Bearer '.$this->token)
+        $response = $this->withHeader('Authorization', 'Bearer ' . $this->token)
             ->put("/api/users/{$this->user_id}", [
                 'name' => 'Mini Me',
             ]);
@@ -100,7 +112,8 @@ class UserTest extends TestCase {
             );
     }
 
-    public function test_new_user_name_update_with_admin_token() {
+    public function test_new_user_name_update_with_admin_token()
+    {
         $response = $this->postJson('/api/login', [
             'email' => 'admin@hydra.project',
             'password' => 'hydra',
@@ -110,7 +123,7 @@ class UserTest extends TestCase {
         $this->token = $data->token;
         $this->user_id = $data->id;
 
-        $response = $this->withHeader('Authorization', 'Bearer '.$this->token)
+        $response = $this->withHeader('Authorization', 'Bearer ' . $this->token)
             ->put("/api/users/{$this->user_id}", [
                 'name' => 'Mini Me',
             ]);
@@ -122,7 +135,8 @@ class UserTest extends TestCase {
             );
     }
 
-    public function test_new_user_destroy_as_user_should_fail() {
+    public function test_new_user_destroy_as_user_should_fail()
+    {
         $response = $this->postJson('/api/login', [
             'email' => 'test@test.com',
             'password' => 'test',
@@ -134,7 +148,7 @@ class UserTest extends TestCase {
 
         $target = User::where('email', 'test@test.com')->first();
 
-        $response = $this->withHeader('Authorization', 'Bearer '.$this->token)
+        $response = $this->withHeader('Authorization', 'Bearer ' . $this->token)
             ->delete("/api/users/{$target->id}");
 
         $response
@@ -144,7 +158,8 @@ class UserTest extends TestCase {
             );
     }
 
-    public function test_new_user_destroy_as_admin() {
+    public function test_new_user_destroy_as_admin()
+    {
         $response = $this->postJson('/api/login', [
             'email' => 'admin@hydra.project',
             'password' => 'hydra',
@@ -156,7 +171,7 @@ class UserTest extends TestCase {
 
         $target = User::where('email', 'test@test.com')->first();
 
-        $response = $this->withHeader('Authorization', 'Bearer '.$this->token)
+        $response = $this->withHeader('Authorization', 'Bearer ' . $this->token)
             ->delete("/api/users/{$target->id}");
 
         $response
@@ -166,11 +181,14 @@ class UserTest extends TestCase {
             );
     }
 
-    public function test_delete_admin_user_if_multiple_admins_are_present() {
+    public function test_delete_admin_user_if_multiple_admins_are_present()
+    {
         $newAdminUser = User::create([
             'name' => 'Test Admin',
             'password' => Hash::make('abcd'),
             'email' => 'testadmin@test.com',
+            'phone' => '25100000001',
+            'gender' => "0",
         ]);
 
         $adminRole = Role::find(1);
@@ -188,7 +206,7 @@ class UserTest extends TestCase {
 
         $target = User::where('email', 'testadmin@test.com')->first();
 
-        $response = $this->withHeader('Authorization', 'Bearer '.$this->token)
+        $response = $this->withHeader('Authorization', 'Bearer ' . $this->token)
             ->delete("/api/users/{$target->id}");
 
         $response
