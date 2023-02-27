@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $creds = $request->validate([
             'email' => 'nullable|email',
-            'phone' => 'required|phone',
+            'phone' => 'required|string',
             'password' => 'required',
             'name' => 'required|string',
             'gender' => 'required|string',
