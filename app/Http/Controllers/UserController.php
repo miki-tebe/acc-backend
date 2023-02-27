@@ -29,10 +29,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $creds = $request->validate([
-            'email' => 'required|email',
+            'email' => 'nullable|email',
+            'phone' => 'required|phone',
             'password' => 'required',
-            'name' => 'nullable|string',
-            'gender' => 'nullable|string',
+            'name' => 'required|string',
+            'gender' => 'required|string',
         ]);
 
         $user = User::where('email', $creds['email'])->first();
@@ -40,8 +41,14 @@ class UserController extends Controller
             return response(['error' => 1, 'message' => 'user already exists'], 409);
         }
 
+        $user = User::where('phone', $creds['phone'])->first();
+        if ($user) {
+            return response(['error' => 1, 'message' => 'user already exists'], 409);
+        }
+
         $user = User::create([
             'email' => $creds['email'],
+            'phone' => $creds['phone'],
             'password' => Hash::make($creds['password']),
             'name' => $creds['name'],
             'gender' => $creds['gender'],
@@ -62,11 +69,11 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $creds = $request->validate([
-            'email' => 'required|email',
+            'phone' => 'required|phone',
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $creds['email'])->first();
+        $user = User::where('phone', $creds['phone'])->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response(['error' => 1, 'message' => 'invalid credentials'], 401);
         }
