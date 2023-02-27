@@ -25,7 +25,11 @@ class AccommodationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([]);
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'summary' => 'required|string',
+        ]);
 
         $accommodation = Accommodation::create($request->all());
 
@@ -41,7 +45,7 @@ class AccommodationController extends Controller
     public function show($id)
     {
         $accommodation = Accommodation::find($id);
-        if (! $accommodation) {
+        if (!$accommodation) {
             return response(['error' => 1, 'message' => 'Accommodation doesn\'t exist'], 404);
         }
 
@@ -58,7 +62,7 @@ class AccommodationController extends Controller
     public function update(Request $request, $id)
     {
         $accommodation = Accommodation::find($id);
-        if (! $accommodation) {
+        if (!$accommodation) {
             return response(['error' => 1, 'message' => 'Accommodation doesn\'t exist'], 404);
         }
 
@@ -76,7 +80,7 @@ class AccommodationController extends Controller
     public function destroy($id)
     {
         $accommodation = Accommodation::find($id);
-        if (! $accommodation) {
+        if (!$accommodation) {
             return response(['error' => 1, 'message' => 'Accommodation doesn\'t exist'], 404);
         }
 

@@ -10,7 +10,25 @@ class Accommodation extends Model
 {
     use HasFactory, Userstamps;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'summary',
+        'category',
+        'price',
+        'i_price',
+        'currency',
+        'published',
+        'fully_booked',
+        'discount',
+        'status',
+        'tags',
+        'commission',
+        'accommodation_images',
+        'accommodation_pictures',
+        'average_rating',
+        'total_reviews',
+    ];
 
     protected $hidden = [
         'created_at',
@@ -19,6 +37,6 @@ class Accommodation extends Model
 
     protected $casts = [
         'tags' => 'array',
-        'accommodationImages' => 'array',
+        'accommodation_images' => 'array',
     ];
 }
