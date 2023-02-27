@@ -85,7 +85,7 @@ class RoleController extends Controller {
      */
     public function destroy(Role $role) {
         if ($role->slug != 'admin' && $role->slug != 'super-admin') {
-            //don't allow changing the admin slug, because it will make the routes inaccessbile due to faile ability check
+            //don't allow changing the admin slug, because it will make the routes inaccessible due to fail ability check
             $role->delete();
 
             return response(['error' => 0, 'message' => 'role has been deleted']);

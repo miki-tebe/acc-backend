@@ -23,11 +23,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('hydra', [HydraController::class, 'hydra']);
 Route::get('hydra/version', [HydraController::class, 'version']);
 
-Route::apiResource('users', UserController::class)->except(['edit', 'create', 'store', 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin']);
+Route::apiResource('users', UserController::class)->except(['edit', 'create', 'store', 'update', 'delete'])->middleware(['auth:sanctum', 'ability:admin,super-admin']);
 Route::post('users', [UserController::class, 'store']);
 Route::put('users/{user}', [UserController::class, 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin,user']);
 Route::post('users/{user}', [UserController::class, 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin,user']);
 Route::patch('users/{user}', [UserController::class, 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin,user']);
+Route::delete('users/{user}', [UserController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:admin,super-admin']);
 Route::get('me', [UserController::class, 'me'])->middleware('auth:sanctum');
 Route::post('login', [UserController::class, 'login']);
 
