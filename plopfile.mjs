@@ -19,7 +19,7 @@ export default function (
             function customAction(answers) {
                 const name = answers.name.replace(" ", "_");
                 exec(
-                    `php artisan make:migration create_${name}_table`,
+                    `php artisan make:migration create${name}_table`,
                     (err, stdout, stderr) => {
                         if (err) {
                             console.log(err);
