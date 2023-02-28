@@ -25,7 +25,25 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([]);
+        $request->validate([
+            'status' => 'nullable|string',
+            'currency' => 'required|string',
+            'checked_in' => 'required|date',
+            'checked_out' => 'required|date',
+            'payment_type' => 'nullable|string',
+            'price' => 'required|numeric',
+            'canceled_reason' => 'nullable|string',
+            'commission' => 'nullable|numeric',
+            'source' => 'nullable|string',
+            'booking_date' => 'nullable|date',
+            'notes' => 'nullable|string',
+            'room_size' => 'nullable|integer',
+            'adults' => 'nullable|integer',
+            'children' => 'nullable|integer',
+            'code' => 'nullable|string',
+            'total_price' => 'nullable|numeric',
+            'total_stay' => 'nullable|integer',
+        ]);
 
         $reservation = Reservation::create($request->all());
 
@@ -41,7 +59,7 @@ class ReservationController extends Controller
     public function show($id)
     {
         $reservation = Reservation::find($id);
-        if (! $reservation) {
+        if (!$reservation) {
             return response(['error' => 1, 'message' => 'Reservation doesn\'t exist'], 404);
         }
 
@@ -58,7 +76,7 @@ class ReservationController extends Controller
     public function update(Request $request, $id)
     {
         $reservation = Reservation::find($id);
-        if (! $reservation) {
+        if (!$reservation) {
             return response(['error' => 1, 'message' => 'Reservation doesn\'t exist'], 404);
         }
 
@@ -76,7 +94,7 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         $reservation = Reservation::find($id);
-        if (! $reservation) {
+        if (!$reservation) {
             return response(['error' => 1, 'message' => 'Reservation doesn\'t exist'], 404);
         }
 
