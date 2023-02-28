@@ -26,6 +26,7 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'user_id' => 'required|exists:users,id',
             'status' => 'nullable|string',
             'currency' => 'required|string',
             'checked_in' => 'required|date',

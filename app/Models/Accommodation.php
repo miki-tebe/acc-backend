@@ -11,6 +11,7 @@ class Accommodation extends Model
     use HasFactory, Userstamps;
 
     protected $fillable = [
+        'user_id',
         'name',
         'description',
         'summary',
@@ -39,4 +40,9 @@ class Accommodation extends Model
         'tags' => 'array',
         'accommodation_images' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

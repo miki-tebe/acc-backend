@@ -26,6 +26,7 @@ class AccommodationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'user_id' => 'required|exists:users,id',
             'name' => 'required|string',
             'description' => 'required|string',
             'summary' => 'required|string',

@@ -11,6 +11,7 @@ class Reservation extends Model
     use HasFactory, Userstamps;
 
     protected $fillable = [
+        'user_id',
         'status',
         'currency',
         'checked_in',
@@ -34,4 +35,9 @@ class Reservation extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
