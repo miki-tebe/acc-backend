@@ -28,6 +28,7 @@ class ReservationController extends Controller
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'accommodation_id' => 'required|exists:accommodations,id',
+            'room_id' => 'required|exists:rooms,id', // if there is an issue change rooms to room
             'status' => 'nullable|string',
             'currency' => 'required|string',
             'checked_in' => 'required|date',
