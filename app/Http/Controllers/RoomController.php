@@ -25,7 +25,17 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'room_price' => 'required|numeric',
+            'room_i_price' => 'nullable|numeric',
+            'room_discount' => 'nullable|numeric',
+            'available_room' => 'nullable|integer',
+            'sharable' => 'nullable|boolean',
+            'room_image' => 'nullable|string',
+            'room_images' => 'nullable|array',
+        ]);
 
         $room = Room::create($request->all());
 
@@ -41,7 +51,7 @@ class RoomController extends Controller
     public function show($id)
     {
         $room = Room::find($id);
-        if (! $room) {
+        if (!$room) {
             return response(['error' => 1, 'message' => 'Room doesn\'t exist'], 404);
         }
 
@@ -58,7 +68,7 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $room = Room::find($id);
-        if (! $room) {
+        if (!$room) {
             return response(['error' => 1, 'message' => 'Room doesn\'t exist'], 404);
         }
 
@@ -76,7 +86,7 @@ class RoomController extends Controller
     public function destroy($id)
     {
         $room = Room::find($id);
-        if (! $room) {
+        if (!$room) {
             return response(['error' => 1, 'message' => 'Room doesn\'t exist'], 404);
         }
 

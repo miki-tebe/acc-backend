@@ -10,7 +10,17 @@ class Room extends Model
 {
     use HasFactory, Userstamps;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'room_price',
+        'room_i_price',
+        'room_discount',
+        'available_room',
+        'sharable',
+        'room_image',
+        'room_images',
+    ];
 
     protected $hidden = [
         'created_at',
@@ -18,6 +28,6 @@ class Room extends Model
     ];
 
     protected $casts = [
-        'roomImages' => 'array'
+        'room_images' => 'array'
     ];
 }
