@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('location', function (Blueprint $table) {
             $table->id();
-            $table->string('placeName')->default('');
-            $table->string('commonName')->default('');
+            $table->string('place_name')->default('');
+            $table->string('common_name')->default('');
             $table->float('lat')->default(8.9972595);
             $table->float('long')->default(38.7867591);
             $table->unsignedBigInteger('created_by')->nullable();

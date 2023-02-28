@@ -25,7 +25,12 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([]);
+        $request->validate([
+            'place_name' => 'nullable|string',
+            'common_name' => 'nullable|string',
+            'lat' => 'nullable|numeric',
+            'long' => 'nullable|numeric',
+        ]);
 
         $location = Location::create($request->all());
 
@@ -41,7 +46,7 @@ class LocationController extends Controller
     public function show($id)
     {
         $location = Location::find($id);
-        if (! $location) {
+        if (!$location) {
             return response(['error' => 1, 'message' => 'Location doesn\'t exist'], 404);
         }
 
@@ -58,7 +63,7 @@ class LocationController extends Controller
     public function update(Request $request, $id)
     {
         $location = Location::find($id);
-        if (! $location) {
+        if (!$location) {
             return response(['error' => 1, 'message' => 'Location doesn\'t exist'], 404);
         }
 
@@ -76,7 +81,7 @@ class LocationController extends Controller
     public function destroy($id)
     {
         $location = Location::find($id);
-        if (! $location) {
+        if (!$location) {
             return response(['error' => 1, 'message' => 'Location doesn\'t exist'], 404);
         }
 
