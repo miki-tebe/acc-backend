@@ -25,7 +25,12 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'picture' => 'nullable|string',
+            'status' => 'nullable|boolean',
+        ]);
 
         $region = Region::create($request->all());
 
@@ -41,7 +46,7 @@ class RegionController extends Controller
     public function show($id)
     {
         $region = Region::find($id);
-        if (! $region) {
+        if (!$region) {
             return response(['error' => 1, 'message' => 'Region doesn\'t exist'], 404);
         }
 
@@ -58,7 +63,7 @@ class RegionController extends Controller
     public function update(Request $request, $id)
     {
         $region = Region::find($id);
-        if (! $region) {
+        if (!$region) {
             return response(['error' => 1, 'message' => 'Region doesn\'t exist'], 404);
         }
 
@@ -76,7 +81,7 @@ class RegionController extends Controller
     public function destroy($id)
     {
         $region = Region::find($id);
-        if (! $region) {
+        if (!$region) {
             return response(['error' => 1, 'message' => 'Region doesn\'t exist'], 404);
         }
 

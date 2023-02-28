@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Wildside\Userstamps\Userstamps;
 
-class Region extends Model {
+class Region extends Model
+{
     use HasFactory, Userstamps;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'picture',
+        'status',
+    ];
 
     protected $hidden = [
         'created_at',
