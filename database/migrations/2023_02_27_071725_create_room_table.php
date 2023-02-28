@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('room', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('accommodation_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
             $table->float('room_price');

@@ -12,6 +12,8 @@ class Accommodation extends Model
 
     protected $fillable = [
         'user_id',
+        'location_id',
+        'region_id',
         'name',
         'description',
         'summary',
@@ -44,5 +46,25 @@ class Accommodation extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

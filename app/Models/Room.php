@@ -11,6 +11,7 @@ class Room extends Model
     use HasFactory, Userstamps;
 
     protected $fillable = [
+        'accommodation_id',
         'name',
         'description',
         'room_price',
@@ -30,4 +31,9 @@ class Room extends Model
     protected $casts = [
         'room_images' => 'array'
     ];
+
+    public function accommodation()
+    {
+        return $this->belongsTo(Accommodation::class);
+    }
 }

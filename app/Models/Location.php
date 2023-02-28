@@ -21,4 +21,9 @@ class Location extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function accommodations()
+    {
+        return $this->hasMany(Accommodation::class);
+    }
 }

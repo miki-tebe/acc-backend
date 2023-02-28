@@ -26,6 +26,7 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'accommodation_id' => 'required|exists:accommodations,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'room_price' => 'required|numeric',

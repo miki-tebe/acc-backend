@@ -18,6 +18,7 @@ return new class extends Migration
         Schema::create('reservation', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('accommodation_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->enum('status', ReservationStatusType::getValues())->default(ReservationStatusType::Pending);
             $table->string('currency');
             $table->timestamp('checked_in');
