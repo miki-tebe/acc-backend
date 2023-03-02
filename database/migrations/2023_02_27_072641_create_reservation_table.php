@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('currency');
             $table->timestamp('checked_in');
             $table->timestamp('checked_out');
-            $table->enum('status', PaymentType::getValues())->default(PaymentType::On_Arrival);
+            $table->enum('payment_type', PaymentType::getValues())->default(PaymentType::On_Arrival);
             $table->float('price');
             $table->string('canceled_reason')->nullable();
             $table->float('commission')->nullable();

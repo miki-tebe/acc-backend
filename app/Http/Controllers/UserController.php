@@ -69,7 +69,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $creds = $request->validate([
-            'phone' => 'required|phone',
+            'phone' => 'required|string',
             'password' => 'required',
         ]);
 
