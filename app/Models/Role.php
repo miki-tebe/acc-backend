@@ -17,6 +17,8 @@ class Role extends Model {
         'pivot',
         'created_at',
         'updated_at',
+        'created_by',
+        'updated_by',
     ];
 
     public function users() {

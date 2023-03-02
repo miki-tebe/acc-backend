@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HydraController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
@@ -34,3 +36,19 @@ Route::post('login', [UserController::class, 'login']);
 
 Route::apiResource('roles', RoleController::class)->except(['create', 'edit'])->middleware(['auth:sanctum', 'ability:admin,super-admin,user']);
 Route::apiResource('users.roles', UserRoleController::class)->except(['create', 'edit', 'show', 'update'])->middleware(['auth:sanctum', 'ability:admin,super-admin']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Location
+    Route::get('locations', [LocationController::class, 'index']);
+    Route::get('locations/{id}', [LocationController::class, 'show']);
+    Route::post('locations', [LocationController::class, 'store']);
+    Route::put('locations/{id}', [LocationController::class, 'update']);
+    Route::delete('locations/{id}', [LocationController::class, 'destroy']);
+
+    // Region
+    Route::get('regions', [RegionController::class, 'index']);
+    Route::get('regions/{id}', [RegionController::class, 'show']);
+    Route::post('regions', [RegionController::class, 'store']);
+    Route::put('regions/{id}', [RegionController::class, 'update']);
+    Route::delete('regions/{id}', [RegionController::class, 'destroy']);
+});

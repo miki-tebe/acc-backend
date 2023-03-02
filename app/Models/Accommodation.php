@@ -36,6 +36,8 @@ class Accommodation extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
+        'created_by',
+        'updated_by',
     ];
 
     protected $casts = [
