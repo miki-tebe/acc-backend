@@ -45,6 +45,14 @@ class Accommodation extends Model
         'accommodation_images' => 'array',
     ];
 
+    protected $with = [
+        'user',
+        'location',
+        'region',
+        'rooms',
+        'reservations',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

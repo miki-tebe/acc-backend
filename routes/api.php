@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\HydraController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,4 +51,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('regions', [RegionController::class, 'store']);
     Route::put('regions/{id}', [RegionController::class, 'update']);
     Route::delete('regions/{id}', [RegionController::class, 'destroy']);
+
+    // Accommodation
+    Route::get('accommodations', [AccommodationController::class, 'index']);
+    Route::get('accommodations/{id}', [AccommodationController::class, 'show']);
+    Route::post('accommodations', [AccommodationController::class, 'store']);
+    Route::put('accommodations/{id}', [AccommodationController::class, 'update']);
+    Route::delete('accommodations/{id}', [AccommodationController::class, 'destroy']);
 });
