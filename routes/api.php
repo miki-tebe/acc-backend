@@ -4,7 +4,9 @@ use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\HydraController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
@@ -58,4 +60,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('accommodations', [AccommodationController::class, 'store']);
     Route::put('accommodations/{id}', [AccommodationController::class, 'update']);
     Route::delete('accommodations/{id}', [AccommodationController::class, 'destroy']);
+
+    // Room
+    Route::get('rooms', [RoomController::class, 'index']);
+    Route::get('rooms/{id}', [RoomController::class, 'show']);
+    Route::post('rooms', [RoomController::class, 'store']);
+    Route::put('rooms/{id}', [RoomController::class, 'update']);
+    Route::delete('rooms/{id}', [RoomController::class, 'destroy']);
+
+    // Reservation
+    Route::get('reservations', [ReservationController::class, 'index']);
+    Route::get('reservations/{id}', [ReservationController::class, 'show']);
+    Route::post('reservations', [ReservationController::class, 'store']);
+    Route::put('reservations/{id}', [ReservationController::class, 'update']);
+    Route::delete('reservations/{id}', [ReservationController::class, 'destroy']);
 });

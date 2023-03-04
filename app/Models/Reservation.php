@@ -40,6 +40,8 @@ class Reservation extends Model
         'updated_by',
     ];
 
+    protected $with = ['user'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

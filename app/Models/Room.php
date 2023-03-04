@@ -34,6 +34,10 @@ class Room extends Model
         'room_images' => 'array'
     ];
 
+    protected $with = [
+        'reservations',
+    ];
+
     public function accommodation()
     {
         return $this->belongsTo(Accommodation::class);
